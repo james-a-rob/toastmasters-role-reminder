@@ -38,6 +38,8 @@ const password = "7efb3dd3";
 //     const browser = await puppeteer.launch();
 //     const page = await browser.newPage();
 //     await page.goto('https://toastmasterclub.org/');
+//     let html = await page.content();
+//     console.log(html);
 //     await page.focus('#username');
 //     await page.keyboard.type(username);
 //     await page.focus('input[name=password]');
