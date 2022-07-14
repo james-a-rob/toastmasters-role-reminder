@@ -34,32 +34,33 @@ const password = "7efb3dd3";
 
 // }
 
-// (async () => {
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     await page.goto('https://toastmasterclub.org/');
-//     let html = await page.content();
-//     console.log(html);
-//     await page.focus('#username');
-//     await page.keyboard.type(username);
-//     await page.focus('input[name=password]');
-//     await page.keyboard.type(password);
+const getNextMeetingHtml = async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://toastmasterclub.org/');
+    let html = await page.content();
+    // console.log(html);
+    await page.focus('#username');
+    await page.keyboard.type(username);
+    await page.focus('input[name=password]');
+    await page.keyboard.type(password);
 
-//     await page.click('input[type="submit"]');
-//     await page.waitForSelector('#ui-id-3', { visible: true })
+    await page.click('input[type="submit"]');
+    await page.waitForSelector('#ui-id-3', { visible: true })
 
-//     const linkToNextMeeting = await page.evaluate('document.querySelector("#ui-id-4 > p:nth-child(2) > a").getAttribute("href")')
-//     console.log(linkToNextMeeting);
-//     await page.goto(`https://toastmasterclub.org/${linkToNextMeeting}`);
-//     await page.click('img[alt="Following meeting"]');
+    const linkToNextMeeting = await page.evaluate('document.querySelector("#ui-id-4 > p:nth-child(2) > a").getAttribute("href")')
+    console.log(linkToNextMeeting);
+    await page.goto(`https://toastmasterclub.org/${linkToNextMeeting}`);
+    await page.click('img[alt="Following meeting"]');
 
-//     await page.screenshot({ path: 'example.png' });
+    await page.screenshot({ path: 'example.png' });
 
-//     await browser.close();
-// })();
+    await browser.close();
+}
 
 
 
-cron.schedule('*/5 * * * * *', () => {
-    console.log('running a task every 5 seconds');
+cron.schedule('*/20 * * * * *', async () => {
+    getNextMeetingHtml();
+    console.log('running a task every 20 seconds');
 });
