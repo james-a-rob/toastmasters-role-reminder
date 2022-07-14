@@ -35,7 +35,10 @@ const password = "7efb3dd3";
 // }
 
 const getNextMeetingHtml = async () => {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    const browser = await puppeteer.launch({
+        args: ['--no-sandbox'],
+        headless: true
+    });
     const page = await browser.newPage();
     await page.goto('https://toastmasterclub.org/');
     let html = await page.content();
@@ -53,7 +56,7 @@ const getNextMeetingHtml = async () => {
     await page.goto(`https://toastmasterclub.org/${linkToNextMeeting}`);
     await page.click('img[alt="Following meeting"]');
 
-    await page.screenshot({ path: 'example.png' });
+    // await page.screenshot({ path: 'example.png' });
 
     await browser.close();
 }
