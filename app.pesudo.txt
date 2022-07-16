@@ -1,0 +1,14 @@
+// get upcoming meeting
+// if already asigned
+    // get next meeting
+    // if asigned
+        // do nothing
+    // if not assigned
+        // send message
+// if not already assigned
+    // send message
+    // get next meeting
+    // if asigned
+        // do nothing
+    // if not assigned
+        // send message
