@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const username = "james3";
-const password = "7efb3dd3";
+const password = process.env.TM_PASSWORD;
 const fullName = 'James Robertson';
 class Toastmasters {
 

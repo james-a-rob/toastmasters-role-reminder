@@ -1,5 +1,5 @@
-const accountSid = process.env.TWILIO_ACCOUNT_SID || "ACe65ec180a112c52486f3e9d30843879b";
-const authToken = process.env.TWILIO_AUTH_TOKEN || "5916cfda74c9f30086e44a00b0db3bec";
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 const PHONE_NUMBER = '+447884000071';
 class Sms {
