@@ -17,7 +17,7 @@ const run = async () => {
     }
     console.log('- - - - finished - - - -');
 }
-
+run();
 cron.schedule('* * * * *', async () => {
     await run();
 });
