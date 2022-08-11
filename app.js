@@ -20,7 +20,11 @@ const run = async () => {
 }
 // run();
 cron.schedule('0 */12 * * *', async () => {
-    await run();
+    try {
+        await run();
+    } catch (e) {
+        console.log(e);
+    }
 });
 
 module.exports = run;
