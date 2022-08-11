@@ -1,4 +1,5 @@
 const cron = require('node-cron');
+require('dotenv').config()
 const Sms = require('./sms');
 const Toastmasters = require('./toastmasters');
 
@@ -17,8 +18,8 @@ const run = async () => {
     }
     console.log('- - - - finished - - - -');
 }
-run();
-cron.schedule('* * * * *', async () => {
+// run();
+cron.schedule('0 */12 * * *', async () => {
     await run();
 });
 
