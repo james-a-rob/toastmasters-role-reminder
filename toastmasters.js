@@ -1,10 +1,12 @@
 const puppeteer = require('puppeteer');
+require('dotenv').config();
 const username = "james3";
 const password = process.env.TM_PASSWORD;
 const fullName = 'James Robertson';
 class Toastmasters {
 
-    async getNextMeeting(meetingUrl) {
+    async getNextMeeting() {
+        console.log(password);
         const browser = await puppeteer.launch({
             args: ['--no-sandbox'],
             headless: true
@@ -29,9 +31,11 @@ class Toastmasters {
         await page.waitForSelector('#ui-id-3', { visible: true })
 
         const rolesHtml = await page.evaluate(() => document.querySelector('#attendance_and_roles_div > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(2)').innerHTML);
-        // await browser.close();
+        const myAttendanceHtml = await page.evaluate(() => document.querySelector('#status_div_ > table > tbody > tr:nth-child(1) > td:nth-child(2)').innerHTML);
 
-        return [rolesHtml, page.url()];
+        await browser.close();
+
+        return [rolesHtml, myAttendanceHtml, page.url()];
     }
 
     isMeetingOpen(rolesHtml) {
@@ -44,6 +48,11 @@ class Toastmasters {
             fullName
         )
     }
-}
 
+    iAmAttending(myAttendanceHtml) {
+        return !myAttendanceHtml.includes(
+            'I am NOT'
+        )
+    }
+}
 module.exports = Toastmasters;

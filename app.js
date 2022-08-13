@@ -7,9 +7,10 @@ const run = async () => {
     const toastmasters = new Toastmasters();
     const sms = new Sms();
 
-    const [nextMeetingHtml, nextMeetingLink] = await toastmasters.getNextMeeting();
+    const [nextMeetingHtml, myAttendanceHtml, nextMeetingLink] = await toastmasters.getNextMeeting();
     const roleIsAsigned = toastmasters.roleIsAsignedToMe(nextMeetingHtml);
-    if (roleIsAsigned) {
+    const iAmAttending = toastmasters.iAmAttending(myAttendanceHtml);
+    if (roleIsAsigned || !iAmAttending) {
         console.log('nothing to do');
     } else {
         console.log('sending sms');
@@ -19,7 +20,7 @@ const run = async () => {
     console.log('- - - - finished - - - -');
 }
 // run();
-cron.schedule('0 */12 * * *', async () => {
+cron.schedule('0 8 * * *', async () => {
     try {
         await run();
     } catch (e) {
